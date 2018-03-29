@@ -1,0 +1,5 @@
+.PdfAnnotator--disable-selection {
+  cursor: crosshair;
+  user-select: none;
+  pointer-events: none;
+}
