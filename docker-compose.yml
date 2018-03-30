@@ -50,8 +50,8 @@ services:
       - postgres
       - redis
       - grobid
-    # ports:
-    #   - '8000:8000'
+    ports:
+      - '8000:8000'
 
 
   # Frontend container (static React files, index.html and bundle.js, served with nginx)
@@ -66,8 +66,8 @@ services:
     # urls(like /media or /feed/rss) to the backend
     links:
       - backend
-    # ports:
-    #   - '8080:8080'
+    ports:
+      - '8080:8080'
 
 
   # This container sits in front of the others,
@@ -76,11 +76,14 @@ services:
   nginx_proxy:
     build: ./nginx_proxy
     container_name: nginx_proxy
+    volumes:
+      - ./my_custom_proxy_settings.conf:/etc/nginx/conf.d/my_custom_proxy_settings.conf
     # See the file nginx_proxy.conf
     # It uses these links to connect you to the two containers
     links:
       - backend
       - frontend
     ports:
-      - '8888:80'
+      - 80:80 # 生产环境中改过来
+    
       

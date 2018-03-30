@@ -21,7 +21,7 @@ const schema = {
   },
   document: {
     nodes: [
-      { types: ['heading1', ], min: 1, max: 1 },
+      { types: ['heading1'], min: 1, max: 1 },
       {
         types: [
           'paragraph',

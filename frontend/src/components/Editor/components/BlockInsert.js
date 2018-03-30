@@ -14,7 +14,7 @@ const propTypes = {
 };
 
 
-function findClosestRootNode(value, ev) {
+const findClosestRootNode = (value, ev) => {
   let previous;
   /* eslint-disable */
   for (const node of value.document.nodes) {
@@ -26,7 +26,7 @@ function findClosestRootNode(value, ev) {
   /* eslint-enable */
 
   return previous;
-}
+};
 
 class BlockInsert extends Component {
   mouseMoveTimeout = 0
@@ -97,8 +97,10 @@ class BlockInsert extends Component {
     this.ui.active = false;
 
     const { editor } = this.props;
+    console.log(editor, 'this.props.editor');
 
     editor.change((change) => {
+      // remove any existing toolbars in the document as a fail safe
       editor.value.document.nodes.forEach((node) => {
         if (node.type === 'block-toolbar') {
           change.removeNodeByKey(node.key);
@@ -107,10 +109,15 @@ class BlockInsert extends Component {
 
       change.collapseToStartOf(this.ui.closestRootNode);
 
-      if (!this.ui.closestRootNode.text && this.ui.closestRootNode.type === 'paragraph') {
+      // if we're on an empty paragraph then just replace it with the block
+      // toolbar. Otherwise insert the toolbar as an extra Node.
+      if (
+        !this.ui.closestRootNode.text &&
+        this.ui.closestRootNode.type === 'paragraph'
+      ) {
         change.setNodeByKey(this.ui.closestRootNode.key, {
           type: 'block-toolbar',
-          isVoid: true
+          isVoid: true,
         });
       } else {
         change.insertBlock({ type: 'block-toolbar', isVoid: true });

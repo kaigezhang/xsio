@@ -142,11 +142,23 @@ class BlockToolbar extends Component {
 
         {this.renderBlockButton('heading1', Heading1Icon)}
         {this.renderBlockButton('heading2', Heading2Icon)}
-        <Separator />
+        <div style={{
+          height: '100%',
+          width: '1px',
+          background: '#E8EBED',
+          display: 'inline-block',
+          marginLeft: '10px'
+        }} />
         {this.renderBlockButton('bulleted-list', BulletedListIcon)}
         {this.renderBlockButton('ordered-list', OrderedListIcon)}
         {this.renderBlockButton('todo-list', TodoListIcon)}
-        <Separator />
+        <div style={{
+          height: '100%',
+          width: '1px',
+          background: '#E8EBED',
+          display: 'inline-block',
+          marginLeft: '10px'
+        }} />
         {this.renderBlockButton('block-quote', BlockQuoteIcon)}
         {this.renderBlockButton('code', CodeIcon)}
         {this.renderBlockButton('horizontal-rule', HorizontalRuleIcon)}
@@ -156,13 +168,13 @@ class BlockToolbar extends Component {
   }
 }
 
-const Separator = styled.div`
-  height: 100%;
-  width: 1px;
-  background: ${color.smokeDark};
-  display: inline-block;
-  margin-left: 10px;
-`;
+// const Separator = styled.div`
+//   height: 100%;
+//   width: 1px;
+//   background: ${color.smokeDark};
+//   display: inline-block;
+//   margin-left: 10px;
+// `;
 
 const Bar = styled(Flex)`
   z-index: 100;
